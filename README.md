@@ -1,80 +1,53 @@
-[README_colaboradores.md](https://github.com/user-attachments/files/19858378/README_colaboradores.md)# 🛠️ Instrucciones para colaboradores del proyecto WorkSyncApp
+[Guia_colaboradores_web.md](https://github.com/user-attachments/files/19858516/Guia_colaboradores_web.md)
+Guía para colaboradores
 
-¡Bienvenidos al repositorio oficial del proyecto!  
-Cada miembro del equipo tiene su propia rama asignada para trabajar de forma ordenada y evitar conflictos.
-
----
-
-## 📌 Ramas asignadas
-
-| Colaborador   | Rama asignada |
-|---------------|----------------|
-| Hernando      | `hernandoZ`    |
-| Camilo        | `camilo`       |
-| Mateo M       | `mateoM`       |
-| Clara         | `clara`        |
-| Mateo Z       | `mateoZ`       |
-| Líder (Cristian) | `main` (gestión general) |
+Esta guía es para los miembros del equipo que prefieren trabajar directamente desde la **interfaz web de GitHub**.
 
 ---
 
-## 🚀 ¿Cómo empezar?
+Entrar al repositorio
 
-### 1. Clonar el repositorio
-
-Abre tu terminal o Git Bash y ejecuta:
-
-```bash
-git clone https://github.com/cristianlopez0725/worksyncapp.git
-cd worksyncapp
-```
-
-### 2. Cambiarte a tu rama
-
-Reemplaza `tu-rama` por la que te corresponde (ver tabla de arriba):
-
-```bash
-git checkout tu-rama
-```
+1. Ir al repositorio oficial:  
+   👉 https://github.com/cristianlopez0725/worksyncapp
+2. Iniciar sesión con tu cuenta de GitHub.
 
 ---
 
-## 💻 Flujo de trabajo
+Cambiarse a tu rama asignada
 
-1. Realiza tus cambios localmente.
-2. Guarda y sube los cambios:
-
-```bash
-git add .
-git commit -m "Descripción clara de los cambios"
-git push origin tu-rama
-```
-
-3. Cuando termines una funcionalidad, avísale al líder para que revise tu rama y la fusione a `main` mediante un Pull Request.
+1. En la parte superior izquierda del repositorio, haz clic en el botón que dice `main` o el nombre de la rama actual.
+2. En el buscador escribe el nombre de tu rama (por ejemplo: `camilo`, `mateoZ`, etc.).
+3. Haz clic en tu rama para seleccionarla.
 
 ---
 
-## 🔄 Mantén tu rama actualizada (opcional pero recomendado)
+Editar archivos desde la web
 
-Cada cierto tiempo puedes sincronizarte con `main` para tener los últimos cambios:
-
-```bash
-git checkout main
-git pull origin main
-git checkout tu-rama
-git merge main
-```
-
----
-
-## ❗ Recomendaciones
-
-- No trabajar directamente en `main`.
-- No modificar ramas de otros compañeros.
-- Escribe mensajes de commit claros y específicos.
+1. Navega por el repositorio hasta encontrar el archivo que quieras editar.
+2. Haz clic en el ícono de lápiz ✏️ (en la parte superior derecha del archivo).
+3. Realiza tus cambios directamente desde el navegador.
+4. Baja hasta el final y llena la sección "Commit changes":
+   - Escribe un mensaje descriptivo (ej: `Cambios en el formulario de contacto`).
+   - Asegúrate de que esté marcada la opción:
+     - ✅ "Commit directly to the `tu-rama` branch"
+   - Haz clic en el botón verde **"Commit changes"**.
 
 ---
 
-¡Gracias por tu colaboración y buen trabajo en equipo!  
-Cualquier duda, comunícate con el líder del proyecto.
+¿Terminaste tus cambios?
 
+Cuando termines una funcionalidad o parte del trabajo:
+
+1. Avísale a Cristian (el líder del proyecto).
+2. Él revisará tu trabajo y lo fusionará a `main` mediante un **Pull Request**.
+
+---
+
+Recomendaciones importantes
+
+- No edites directamente en la rama `main`.
+- Asegúrate siempre de estar en **tu rama asignada** antes de hacer cambios.
+- Usa nombres de commits claros.
+- No borres archivos de otros compañeros.
+
+---

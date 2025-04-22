@@ -8,7 +8,7 @@ Esta guía es para los miembros del equipo que prefieren trabajar directamente d
 Entrar al repositorio
 
 1. Ir al repositorio oficial:  
-   👉 https://github.com/cristianlopez0725/worksyncapp
+   https://github.com/cristianlopez0725/worksyncapp
 2. Iniciar sesión con tu cuenta de GitHub.
 
 ---
@@ -24,12 +24,12 @@ Cambiarse a tu rama asignada
 Editar archivos desde la web
 
 1. Navega por el repositorio hasta encontrar el archivo que quieras editar.
-2. Haz clic en el ícono de lápiz ✏️ (en la parte superior derecha del archivo).
+2. Haz clic en el ícono de lápiz  (en la parte superior derecha del archivo).
 3. Realiza tus cambios directamente desde el navegador.
 4. Baja hasta el final y llena la sección "Commit changes":
    - Escribe un mensaje descriptivo (ej: `Cambios en el formulario de contacto`).
    - Asegúrate de que esté marcada la opción:
-     - ✅ "Commit directly to the `tu-rama` branch"
+     - "Commit directly to the `tu-rama` branch"
    - Haz clic en el botón verde **"Commit changes"**.
 
 ---

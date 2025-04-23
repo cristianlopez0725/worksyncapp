@@ -47,6 +47,6 @@ class Conectar {
     }
 
     public static function ruta() {
-        return "http://localhost/proyecto_pagina/";
+        return "http://localhost/worksync/";
     }
 }

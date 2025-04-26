@@ -51,7 +51,7 @@ if (isset($_POST["enviar"]) && $_POST["enviar"] === "si") {
                                 case "1":
                                     ?>
                                     <div class="alert alert-danger" role="alert">
-                                        Los datos ingresados son incorrectos!
+                                        Los datos no han sido encontrados, son incorrectos!
                                     </div>
                                     <?php
                                     break;

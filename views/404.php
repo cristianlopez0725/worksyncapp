@@ -1,6 +1,6 @@
 <?php
-define("BASE_PATH", "/pagina/views/"); 
-require_once("../config/conexion.php"); 
+define("BASE_PATH", "/worksync/views/"); 
+require_once("../config/conexion_worksync.php"); 
 
 if (isset($_SESSION["usu_id"])) {
 

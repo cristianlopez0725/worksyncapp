@@ -25,10 +25,13 @@ if (isset($_POST["enviar"]) && $_POST["enviar"] === "si") {
 
     <!-- Pantalla principal -->
     <div id="pantalla-inicial" class="login-box">
-      <img src="images/logo.png.png" alt="Logo WorkSync" class="logo" />
-      <img src="images/ilustracion.png.jpg" alt="Ilustración" class="illustration" />
+      <img src="imagenes/logo.png.png" alt="Logo WorkSync" class="logo" />
+      <img src="imagenes/ilustracion.png.jpg" alt="Ilustración" class="illustration" />
       <button class="btn white-btn" onclick="mostrarPantalla('login')">INICIAR SESIÓN</button>
       <button class="btn outlined-btn" onclick="mostrarPantalla('registro')">REGISTRARSE</button>
+      <p class="continuar">o continua con</p>
+      <button class="btn google-btn"><i class="fab fa-google icono"></i> Google</button>
+      <button class="btn facebook-btn"><i class="fab fa-facebook-f icono"></i> Facebook</button>
       <a href="#" class="recuperar" onclick="mostrarPantalla('recuperar')">Recuperar contraseña</a>
       <p class="footer-text">
         Al registrarse aceptas el <a href="#">Aviso al Usuario</a><br />
@@ -36,7 +39,7 @@ if (isset($_POST["enviar"]) && $_POST["enviar"] === "si") {
       </p>
     </div>
 
-    <!-- Pantalla de Iniciar Sesión -->
+    <!-- Pantalla de Login -->
     <div id="pantalla-login" class="login-box oculto">
       <i class="fas fa-arrow-left back" onclick="volver()"></i>
       <img src="imagenes/logo.png.png" alt="Logo WorkSync" class="logo" />
@@ -48,8 +51,9 @@ if (isset($_POST["enviar"]) && $_POST["enviar"] === "si") {
         <i class="fas fa-check-circle"></i> Recordarme
       </label>
       <button class="btn blue-btn">Continuar</button>
-      <div class="col-4">
-      <button class="btn lightblue-btn" onclick="mostrarPantalla('registro')">Registrarse</button>
+      <p class="continuar">o continua con</p>
+      <button class="btn google-btn"><i class="fab fa-google icono"></i> Google</button>
+      <button class="btn facebook-btn"><i class="fab fa-facebook-f icono"></i> Facebook</button>
       <a href="#" class="recuperar" onclick="mostrarPantalla('recuperar')">Recuperar contraseña</a>
       <p class="footer-text">
         Al registrarse aceptas el <a href="#">Aviso al Usuario</a><br />
@@ -57,19 +61,21 @@ if (isset($_POST["enviar"]) && $_POST["enviar"] === "si") {
       </p>
     </div>
 
-    <!-- Pantalla de Registro -->
     <div id="pantalla-registro" class="login-box oculto">
-      <i class="fas fa-arrow-left back" onclick="volver()"></i>
+      <i class="fas fa-arrow-left back" onclick="mostrarPantalla('login')"></i>
       <img src="imagenes/logo.png.png" alt="Logo WorkSync" class="logo" />
       <p class="subtitulo">Regístrate para continuar</p>
       <input type="email" placeholder="Introduce tu correo electrónico" class="input" />
       <input type="password" placeholder="Crea una contraseña" class="input" />
+      <input type="tel" placeholder="Número de teléfono" class="input" />
       <label class="recordarme">
         <input type="checkbox" />
         <i class="fas fa-check-circle"></i> Recordarme
       </label>
       <button class="btn blue-btn">Continuar</button>
-      <button class="btn lightblue-btn" onclick="mostrarPantalla('login')">Iniciar sesión</button>
+      <p class="continuar">o continua con</p>
+      <button class="btn google-btn"><i class="fab fa-google icono"></i> Google</button>
+      <button class="btn facebook-btn"><i class="fab fa-facebook-f icono"></i> Facebook</button>
       <a href="#" class="recuperar" onclick="mostrarPantalla('recuperar')">Recuperar contraseña</a>
       <p class="footer-text">
         Al registrarse aceptas el <a href="#">Aviso al Usuario</a><br />
@@ -77,7 +83,6 @@ if (isset($_POST["enviar"]) && $_POST["enviar"] === "si") {
       </p>
     </div>
 
-    <!-- Pantalla de Recuperar Contraseña -->
     <div id="pantalla-recuperar" class="login-box oculto">
       <i class="fas fa-arrow-left back" onclick="volver()"></i>
       <img src="imagenes/logo.png.png" alt="Logo WorkSync" class="logo" />
@@ -95,6 +100,7 @@ if (isset($_POST["enviar"]) && $_POST["enviar"] === "si") {
   <script src="../public/js/main.js"></script>
 </body>
 </html>
+
 
                     <?php 
                         if(isset($_GET["m"])){

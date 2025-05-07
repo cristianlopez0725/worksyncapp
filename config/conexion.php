@@ -10,7 +10,7 @@ class Conectar {
             $server = "localhost";
             $user = "root";
             $password = "";
-            $database = "pagina";
+            $database = "db_worksync";
             $charset = "utf8";
     
             $dsn = sprintf("%s:host=%s;dbname=%s;charset=%s", $engine, $server, $database, $charset);
@@ -47,6 +47,6 @@ class Conectar {
     }
 
     public static function ruta() {
-        return "http://localhost/proyecto_pagina/";
+        return "http://localhost/worksync/";
     }
 }

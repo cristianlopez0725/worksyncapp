@@ -1,7 +1,7 @@
 <?php
 
 // Define la URL base de tu proyecto
-define("BASE_URL", "/proyecto_pagina/views/");
+define("BASE_URL", "/worksync/views/");
 
 // Llama al archivo de conexión
 require_once("../config/conexion.php");
@@ -52,12 +52,12 @@ if (!isset($_SESSION["usu_id"])) {
         </div>
 
         <div class="info">
-          <p class="text-white"><?php echo  $_SESSION['usu_nom'] ." ". $_SESSION['usu_apep'] ; ?></p>
+          <p class="text-white"><?php echo  $_SESSION['nombre'] ." ". $_SESSION['apellido'] ; ?></p>
         </div>
       </div>
 
       
-      <input type="hidden" id="usu_id" value="<?php echo $_SESSION["usu_id"];?>">
+      <input type="hidden" id="usu_id" value="<?php echo $_SESSION["id_usuario"];?>">
 
       <?php require_once("modulos/menu.php"); ?>
     </div>
@@ -112,19 +112,15 @@ if (!isset($_SESSION["usu_id"])) {
               <h5 class="modal-title" id="modalAddLabel">Agregar Usuario</h5>
             </div>
             <form>
-              <input type="hidden" id="usuario_id">
+              <input type="hidden" id="id_usuario">
               <div class="modal-body">
                 <div class="form-group">
-                  <label for="usuario_nombre">Nombre</label>
-                  <input type="text" id="usuario_nombre" class="form-control" placeholder="Nombre">
+                  <label for="nombre">Nombre</label>
+                  <input type="text" id="nombre" class="form-control" placeholder="Nombre">
                 </div>
                 <div class="form-group">
-                  <label for="usuario_apep">Apellido Paterno</label>
-                  <input type="text" id="usuario_apep" class="form-control" placeholder="Apellido Paterno">
-                </div>
-                <div class="form-group">
-                  <label for="usuario_apem">Apellido Materno</label>
-                  <input type="text" id="usuario_apem" class="form-control" placeholder="Apellido Materno">
+                  <label for="apellido">Apellido Paterno</label>
+                  <input type="text" id="apellido" class="form-control" placeholder="Apellido Paterno">
                 </div>
                 <div class="form-group">
                   <label for="usuario_correo">Correo</label>

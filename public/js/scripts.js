@@ -19,3 +19,4 @@ function mostrarPantalla(pantalla) {
     document.getElementById("pantalla-recuperar").classList.add("oculto");
     document.getElementById("pantalla-inicial").classList.remove("oculto");
   }
+  

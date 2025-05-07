@@ -13,6 +13,7 @@ if (!isset($_SESSION['correo'])) {
 <head>
     <meta charset="UTF-8">
     <title>Inicio | WorkSync</title>
+    <link rel="stylesheet" href="../public/css/stylehome.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -20,7 +21,7 @@ if (!isset($_SESSION['correo'])) {
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">WorkSync</a>
+        <img src="../images/logo2.png">
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item me-3">

@@ -27,7 +27,7 @@ if (!isset($_SESSION['correo'])) {
                     <span class="nav-link text-white">Bienvenido, <?php echo $_SESSION['correo']; ?></span>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-outline-light" href="../logout.php">Cerrar sesión</a>
+                    <a class="btn btn-outline-light" href="index.php">Cerrar sesión</a>
                 </li>
             </ul>
         </div>
@@ -78,7 +78,7 @@ if (!isset($_SESSION['correo'])) {
         </a>
         <div class="dropdown-menu dropdown-menu-right">
           <a href="perfil.php" class="dropdown-item">Perfil</a>
-          <a href="../logout.php" class="dropdown-item">Cerrar sesión</a>
+          <a href="index.php" class="dropdown-item">Cerrar sesión</a>
         </div>
       </li>
     </ul>

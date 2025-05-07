@@ -1,15 +1,15 @@
 <?php
-// Iniciar sesión
 session_start();
 
-// Destruir todas las variables de sesión
-session_unset();
+if (isset($_SESSION["usu_id"])) {
+   
+    session_unset();
 
-// Destruir la sesión
-session_destroy();
+    session_destroy();
+}
 
-// Redirigir al login
-header("Location: login.php");
+header("Location: index.php");
 exit();
 ?>
+
 

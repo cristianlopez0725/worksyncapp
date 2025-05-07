@@ -1,14 +1,11 @@
 <?php
 $host = "localhost";
 $usuario = "root";
-$contrasena = ""; // cambia esto si tu BD tiene contraseña
-$base_de_datos = "worksync";
+$contrasena = ""; // si tienes contraseña ponla aquí
+$base_datos = "worksync";
 
-// Crear conexión
-$conn = new mysqli($host, $usuario, $contrasena, $base_de_datos);
-
-// Verificar conexión
+$conn = new mysqli($host, $usuario, $contrasena, $base_datos);
 if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+    die("Error de conexión: " . $conn->connect_error);
 }
 ?>

@@ -95,17 +95,6 @@
     margin: 10px 0;
   }
   
-  .google-btn,
-  .facebook-btn {
-    background-color: rgba(255, 255, 255, 0.15);
-    border: 1px solid #ffffff;
-    color: #ffffff;
-  }
-  
-  .google-btn:hover,
-  .facebook-btn:hover {
-    opacity: 0.85;
-  }
   
   .recordarme {
     font-size: 13px;

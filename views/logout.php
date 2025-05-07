@@ -1,6 +1,2 @@
-<?php 
-    require_once("../config/conexion.php");
-    session_destroy();
-    header("location:".Conectar::ruta()."views/login.php");
-    exit();
-?>
+// En el archivo de cierre de sesión
+setcookie('correo', '', time() - 3600, "/");

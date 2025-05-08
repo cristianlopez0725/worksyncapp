@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WorkSync - Dashboard de Tareas Avanzado</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- HEADER GENERAL -->
+  <header class="app-header">
+    <div class="header-container">
+      <h1 class="logo">WORKSYNC</h1>
+      <div class="header-actions">
+      </div>
+    </div>
+  </header>
+
+  <!-- VISTA PRINCIPAL -->
+  <div class="container" id="main-view">
+    <header>
+      <h1>Gestión de Tareas y Logros</h1>
+      <div class="controls">
+        <button id="filter-complete">Ver 100% Completadas</button>
+        <button id="filter-all">Ver Todas</button>
+      </div>
+    </header>
+    <div class="users-list" id="users-list">
+      <!-- Tarjetas de usuario -->
+    </div>
+  </div>
+
+  <!-- VISTA DETALLE -->
+  <div class="container" id="detail-view" style="display:none;">
+    <button id="back-btn">← Volver</button>
+    <h2 id="detail-username"></h2>
+    <div class="task-lists">
+      <div>
+        <h3>Tareas Completadas</h3>
+        <ul id="done-tasks"></ul>
+      </div>
+      <div>
+        <h3>Tareas Pendientes</h3>
+        <ul id="pending-tasks"></ul>
+      </div>
+    </div>
+    <p class="detail-message" id="detail-message"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

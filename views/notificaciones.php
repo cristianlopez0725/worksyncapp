@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestor de Tareas</title>
+  <link rel="stylesheet" href="../public/css/noti.css" />
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Gestor de Tareas</h1>
+    <form id="task-form">
+      <input type="text" id="task-title" placeholder="Título de la tarea" required />
+      <input type="datetime-local" id="task-deadline" required />
+      <input type="email" id="task-email" placeholder="Correo para notificación" required />
+      <button type="submit">Agregar Tarea</button>
+    </form>
+    <ul id="task-list"></ul>
+    <!-- Botón para redirigir a ChatGPT -->
+    <a href="https://chat.openai.com/" target="_blank" class="chatgpt-button">Consulta con IA</a>
+  </div>
+  <script src="../public/js/noti.js"></script>
+</body>
+</html>>

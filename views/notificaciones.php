@@ -67,5 +67,7 @@ if (!isset($_SESSION['correo'])) {
     <a href="https://chat.openai.com/" target="_blank" class="chatgpt-button">Consulta con IA</a>
   </div>
   <script src="../public/js/noti.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>>

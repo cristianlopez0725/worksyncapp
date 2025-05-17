@@ -1,1 +1,57 @@
-MariaDB [(none)]> CREATE DATABASE unv_brandonsabogal_bd; Query OK, 1 row affected (0.005 sec) MariaDB [(none)]> use unv_brandonsabogal_bd; Database changed MariaDB [unv_brandonsabogal_bd]> CREATE TABLE estudiantes ( -> id SERIAL PRIMARY KEY, -> nombre VARCHAR(100) NOT NULL -> ); Query OK, 0 rows affected (0.016 sec) MariaDB [unv_brandonsabogal_bd]> CREATE TABLE cursos ( -> id SERIAL PRIMARY KEY, -> nombre VARCHAR(100) NOT NULL, -> creditos INT NOT NULL CHECK (creditos > 0) -> ); Query OK, 0 rows affected (0.011 sec) MariaDB [unv_brandonsabogal_bd]> CREATE TABLE matriculas ( -> id SERIAL PRIMARY KEY, -> estudiante_id INT REFERENCES estudiantes(id), -> curso_id INT REFERENCES cursos(id), -> nota DECIMAL(3,2) CHECK (nota >= 0 AND nota <= 5) -> ); Query OK, 0 rows affected (0.017 sec) MariaDB [unv_brandonsabogal_bd]> INSERT INTO estudiantes (nombre) VALUES -> ('Ana Gómez'), ('Luis Pérez'), ('Marta Díaz'), ('Carlos Ruiz'), ('Sofía León'), -> ('Andrés Mora'), ('Elena Ríos'), ('Pedro Salas'), ('Lucía Vega'), ('Marco Silva'); Query OK, 10 rows affected, 7 warnings (0.038 sec) Records: 10 Duplicates: 0 Warnings: 7 MariaDB [unv_brandonsabogal_bd]> INSERT INTO cursos (nombre, creditos) VALUES -> ('Matemáticas', 3), ('Física', 4), ('Programación', 5), ('Historia', 2), ('Química', 3); Query OK, 5 rows affected, 4 warnings (0.008 sec) Records: 5 Duplicates: 0 Warnings: 4 MariaDB [unv_brandonsabogal_bd]> INSERT INTO matriculas (estudiante_id, curso_id, nota) -> SELECT e.id, c.id, ROUND(2 + random() * 3, 2) -> FROM estudiantes e -> JOIN (SELECT id FROM cursos ORDER BY RANDOM() LIMIT 3) c ON true -> LIMIT 30; ERROR 1305 (42000): FUNCTION unv_brandonsabogal_bd.RANDOM does not exist MariaDB [unv_brandonsabogal_bd]> INSERT INTO matriculas (estudiante_id, curso_id, nota) VALUES -> (1, 1, 3.5), (1, 2, 4.7), (1, 3, 2.8), -> (2, 1, 4.2), (2, 4, 4.8), (2, 5, 3.1), -> (3, 1, 2.5), (3, 3, 3.7), (3, 5, 3.9), -> (4, 2, 3.3), (4, 3, 4.1), (4, 5, 2.7), -> (5, 1, 4.9), (5, 2, 4.8), (5, 4, 4.6), -> (6, 2, 3.5), (6, 3, 3.9), (6, 4, 2.9), -> (7, 1, 3.0), (7, 4, 2.7), (7, 5, 4.0), -> (8, 2, 3.6), (8, 3, 4.0), (8, 5, 3.2), -> (9, 1, 3.7), (9, 2, 3.1), (9, 4, 4.3), -> (10, 3, 4.5), (10, 4, 4.2), (10, 5, 4.9); Query OK, 30 rows affected (0.009 sec) Records: 30 Duplicates: 0 Warnings: 0 MariaDB [unv_brandonsabogal_bd]> CREATE OR REPLACE FUNCTION promedio_ponderado(est_id INT) -> RETURNS NUMERIC AS $$ -> DECLARE -> promedio NUMERIC; ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS $$ DECLARE promedio NUMERIC' at line 2 MariaDB [unv_brandonsabogal_bd]> BEGIN -> SELECT SUM(m.nota * c.creditos) / SUM(c.creditos) -> INTO promedio -> FROM matriculas m -> JOIN cursos c ON m.curso_id = c.id -> WHERE m.estudiante_id = est_id; ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'SELECT SUM(m.nota * c.creditos) / SUM(c.creditos) INTO promedio FROM ...' at line 2 MariaDB [unv_brandonsabogal_bd]> MariaDB [unv_brandonsabogal_bd]> RETURN promedio; ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'RETURN promedio' at line 1 MariaDB [unv_brandonsabogal_bd]> END; ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'END' at line 1 MariaDB [unv_brandonsabogal_bd]> $$ LANGUAGE plpgsql;SELECT e.id, e.nombre, ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '$$ LANGUAGE plpgsql' at line 1 -> ROUND(SUM(m.nota * c.creditos) / SUM(c.creditos), 2) AS promedio_ponderado -> FROM estudiantes e -> JOIN matriculas m ON e.id = m.estudiante_id -> JOIN cursos c ON m.curso_id = c.id -> WHERE e.id = 1 -> GROUP BY e.id; +----+-----------+--------------------+ | id | nombre | promedio_ponderado | +----+-----------+--------------------+ | 1 | Ana G?mez | 3.61 | +----+-----------+--------------------+ 1 row in set (0.001 sec) MariaDB [unv_brandonsabogal_bd]> CREATE VIEW promedio_ponderado_estudiantes AS -> SELECT e.id AS estudiante_id, e.nombre, -> ROUND(SUM(m.nota * c.creditos) / SUM(c.creditos), 2) AS promedio_ponderado -> FROM estudiantes e -> JOIN matriculas m ON e.id = m.estudiante_id -> JOIN cursos c ON m.curso_id = c.id -> GROUP BY e.id; Query OK, 0 rows affected (0.006 sec) MariaDB [unv_brandonsabogal_bd]> SELECT e.nombre AS estudiante, c.nombre AS curso, m.nota, -> IF(m.nota >= 3, 'Aprueba', 'No Aprueba') AS estado -> FROM matriculas m -> JOIN estudiantes e ON m.estudiante_id = e.id -> JOIN cursos c ON m.curso_id = c.id -> WHERE e.id = 1 AND c.id = 2; +------------+--------+------+---------+ | estudiante | curso | nota | estado | +------------+--------+------+---------+ | Ana G?mez | F?sica | 4.70 | Aprueba | +------------+--------+------+---------+ 1 row in set (0.001 sec) MariaDB [unv_brandonsabogal_bd]> SELECT e.id, e.nombre, COUNT(*) AS cursos_exaltados -> FROM estudiantes e -> JOIN matriculas m ON e.id = m.estudiante_id -> WHERE m.nota > 4.5 -> GROUP BY e.id, e.nombre -> HAVING cursos_exaltados >= 2; +----+------------+------------------+ | id | nombre | cursos_exaltados | +----+------------+------------------+ | 5 | Sof?a Le?n | 3 | +----+------------+------------------+ 1 row in set (0.001 sec) MariaDB [unv_brandonsabogal_bd]> SELECT e.nombre AS estudiante, c.nombre AS curso, m.nota, -> IF(m.nota >= 3, 'Aprueba', 'No Aprueba') AS estado -> FROM matriculas m -> JOIN estudiantes e ON m.estudiante_id = e.id -> JOIN cursos c ON m.curso_id = c.id -> ORDER BY e.nombre; +-------------+--------------+------+------------+ | estudiante | curso | nota | estado | +-------------+--------------+------+------------+ | Ana G?mez | Matem?ticas | 3.50 | Aprueba | | Ana G?mez | F?sica | 4.70 | Aprueba | | Ana G?mez | Programaci?n | 2.80 | No Aprueba | | Andr?s Mora | Historia | 2.90 | No Aprueba | | Andr?s Mora | F?sica | 3.50 | Aprueba | | Andr?s Mora | Programaci?n | 3.90 | Aprueba | | Carlos Ruiz | F?sica | 3.30 | Aprueba | | Carlos Ruiz | Programaci?n | 4.10 | Aprueba | | Carlos Ruiz | Qu?mica | 2.70 | No Aprueba | | Elena R?os | Historia | 2.70 | No Aprueba | | Elena R?os | Qu?mica | 4.00 | Aprueba | | Elena R?os | Matem?ticas | 3.00 | Aprueba | | Luc?a Vega | Historia | 4.30 | Aprueba | | Luc?a Vega | Matem?ticas | 3.70 | Aprueba | | Luc?a Vega | F?sica | 3.10 | Aprueba | | Luis P?rez | Historia | 4.80 | Aprueba | | Luis P?rez | Qu?mica | 3.10 | Aprueba | | Luis P?rez | Matem?ticas | 4.20 | Aprueba | | Marco Silva | Programaci?n | 4.50 | Aprueba | | Marco Silva | Historia | 4.20 | Aprueba | | Marco Silva | Qu?mica | 4.90 | Aprueba | | Marta D?az | Programaci?n | 3.70 | Aprueba | | Marta D?az | Qu?mica | 3.90 | Aprueba | | Marta D?az | Matem?ticas | 2.50 | No Aprueba | | Pedro Salas | F?sica | 3.60 | Aprueba | | Pedro Salas | Programaci?n | 4.00 | Aprueba | | Pedro Salas | Qu?mica | 3.20 | Aprueba | | Sof?a Le?n | Historia | 4.60 | Aprueba | | Sof?a Le?n | F?sica | 4.80 | Aprueba | | Sof?a Le?n | Matem?ticas | 4.90 | Aprueba | +-------------+--------------+-----
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio | WorkSync</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar con logo y menú horizontal -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="../images/logo2.png" alt="Logo WorkSync" style="height: 60px; width: auto; margin-right: 10px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="proyectos.php"><i class="bi bi-folder2-open"></i> Proyectos</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="perfil.php"><i class="bi bi-person-circle"></i> Perfil</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="notificaciones.php"><i class="bi bi-bell"></i> Notificaciones</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="logros.php"><i class="bi bi-trophy"></i> Logros</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="estadisticas.php"><i class="bi bi-bar-chart-line"></i> Estadísticas</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <span class="nav-link text-white"><i class="bi bi-person-check"></i> <?php echo $_SESSION['correo']; ?></span>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="btn btn-outline-light btn-sm" href="index.php"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Contenido principal -->
+<div class="main-container text-center">
+    <h1 class="mb-4">¡Bienvenido a WorkSync!</h1>
+    <p class="lead">Desde aquí podrás gestionar tus proyectos, tareas y rendimiento personal.</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

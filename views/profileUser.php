@@ -1,144 +1,99 @@
-<?php
-define("BASE_URL", "/pagina/"); 
-require_once("../config/conexion.php"); 
 
-if (isset($_SESSION["usu_id"])) {
-?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="../../dashboard/stylesheets/all.css">
+  <title>Perfil de Usuario - WORKSYNC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Perfil Usuario</title>
-
-  <?php require_once("modulos/css.php"); ?>
-
+  <link rel="stylesheet" href="../../dashboard/stylesheets/perfilUsuario.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #4dd0e1, #26c6da);
+      font-family: Arial, sans-serif;
+    }
+    .profile-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 30px;
+      max-width: 600px;
+      margin: 40px auto;
+    }
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #00acc1;
+    }
+    .profile-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .profile-info label {
+      font-weight: bold;
+      color: #007c91;
+    }
+    .profile-info p {
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
-<body class="hold-transition sidebar-mini">
-<!-- Site wrapper -->
-<div class="wrapper">
-  
-  <!-- Navbar -->
-  <?php require_once("modulos/header.php"); ?>
-  
-  <!-- /.navbar -->
+<body>
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-   <a href="../index.php" class="brand-link">
-    <img src="../images/logo.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">Proyecto web</span>
-    </a>
+<!-- Navbar horizontal -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <a href="inicio.php" class="navbar-brand d-flex align-items-center">
+    <img src="../images/logo.png" alt="Logo" class="brand-image img-circle elevation-3" style="height: 30px; width: 30px;">
+    <span class="ml-2 font-weight-light">WORKSYNC</span>
+  </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="../images/Profile-PNG-File.png" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <p class="text-white"><?php echo  $_SESSION['usu_nom'] ." ". $_SESSION['usu_apep'] ; ?></p>
-        </div>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item mx-2"><a href="inicio.php" class="nav-link"><i class='bx bx-home'></i> Inicio</a></li>
+    <li class="nav-item mx-2"><a href="proyectos.php" class="nav-link"><i class='bx bx-briefcase'></i> Proyectos</a></li>
+    <li class="nav-item mx-2"><a href="agenda.php" class="nav-link"><i class='bx bx-calendar'></i> Agenda</a></li>
+    <li class="nav-item mx-2"><a href="incidencias.php" class="nav-link"><i class='bx bx-error-circle'></i> Incidencias</a></li>
+    <li class="nav-item dropdown mx-2">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+        <img src="../images/Profile-PNG-File.png" class="img-circle" style="height: 25px;">
+        <?php echo $_SESSION['usu_nom']; ?>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a href="perfil.php" class="dropdown-item">Perfil</a>
+        <a href="../logout.php" class="dropdown-item">Cerrar sesión</a>
       </div>
+    </li>
+  </ul>
+</nav>
 
-      <!-- SidebarSearch Form -->
-      
+<!-- Perfil del usuario -->
+<div class="profile-card">
+  <div class="profile-header">
+    <img src="../images/Profile-PNG-File.png" alt="Usuario" class="profile-img">
+    <h3><?php echo $_SESSION['usu_nom'] . " " . $_SESSION['usu_apep']; ?></h3>
+    <p class="text-muted">Usuario activo</p>
+  </div>
+  <div class="profile-info">
+    <label>Correo:</label>
+    <p><?php echo $_SESSION['usu_correo']; ?></p>
 
-      <!-- Sidebar Menu -->
-      <?php require_once("modulos/menu.php"); ?>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+    <label>Teléfono:</label>
+    <p><?php echo $_SESSION['usu_telefono'] ?? 'No especificado'; ?></p>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Perfil Usuario</h1>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-    <section class="content">
-        <div class="row">
-            <div class="col-12" id="accordion">
-                <div class="card card-primary card-outline">
-                    <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
-                        <div class="card-header">
-                            <h4 class="text-black"><?php echo  $_SESSION['usu_nom'] ." ". $_SESSION['usu_apep'] ; ?></h4>
-                        </div>
-                    </a>
-                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                        <div class="card-body">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="col-12">
-            <div class="card card-primary">
-              <div class="card-header">
-                <h4 class="card-title">Galleria </h4>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-2">
-                    <a href="#" data-toggle="lightbox" data-title="sample 1 - red" data-gallery="gallery">
-                      <img src="https://via.placeholder.com/300/FF0000/FFFFFF?text=1" class="img-fluid mb-2" alt="white sample">
-                    </a>
-                  </div>
-                  <div class="col-sm-2">
-                    <a href="#" data-toggle="lightbox" data-title="sample 2-black data-gallery="gallery">
-                      <img src="https://via.placeholder.com/300/000000?text=2" class="img-fluid mb-2" alt="black sample">
-                    </a>
-                  </div>
-                  <div class="col-sm-2">
-                    <a href="#" data-toggle="lightbox" data-title="sample 3-black" data-gallery="gallery">
-                      <img src="https://via.placeholder.com/300/FF0000/FFFFFF?text=3" class="img-fluid mb-2" alt="red sample">
-                    </a>
-                  </div>
-                  <div class="col-sm-2">
-                    <a href="#" data-toggle="lightbox" data-title="sample 4-red" data-gallery="gallery">
-                      <img src="https://via.placeholder.com/300/FF0000/FFFFFF?text=4" class="img-fluid mb-2" alt="red sample">
-                    </a>
-                  </div> 
-                </div>
-              </div>
-            </div>
-          </div>
-  
-  </section>
-    <!-- /.content -->
+    <label>Rol:</label>
+    <p><?php echo $_SESSION['usu_rol'] ?? 'Usuario'; ?></p>
+
+    <label>Fecha de Registro:</label>
+    <p><?php echo $_SESSION['usu_fecha'] ?? 'Desconocida'; ?></p>
+  </div>
 </div>
-  <!-- /.content-wrapper -->
-
-  <?php require_once("modulos/footer.php"); ?>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-<?php require_once("modulos/js.php"); ?>
-
 
 </body>
 </html>
 <?php
-}else{
+} else {
   header("location: " . Conectar::ruta() . "views/404.php");
   exit();
-
 }
 ?>

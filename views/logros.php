@@ -22,6 +22,8 @@ $stmt->close();
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Logros</title>
   <link rel="stylesheet" href="../public/css/logros.css" />
+  <link rel="stylesheet" href="../public/css/menu.css">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -44,7 +46,7 @@ $stmt->close();
                     <a class="nav-link" href="proyectos.php"><i class="bi bi-folder2-open"></i> Proyectos</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link" href="perfil.php"><i class="bi bi-person-circle"></i> Perfil</a>
+                    <a class="nav-link" href="perfilUsuario.php"><i class="bi bi-person-circle"></i> Perfil</a>
                 </li>
                 <li class="nav-item mx-2">
                     <a class="nav-link" href="notificaciones.php"><i class="bi bi-bell"></i> Notificaciones</a>

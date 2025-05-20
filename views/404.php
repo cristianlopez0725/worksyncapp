@@ -2,6 +2,9 @@
 
 define("BASE_PATH", "/worksync/views/"); 
 require_once("../config/conexion_worksync.php"); 
+    if (isset($_SESSION["id"])) {
+    
+    }
 
 ?>
 

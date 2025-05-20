@@ -14,6 +14,8 @@ if (!isset($_SESSION['correo'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Proyectos</title>
   <link rel="stylesheet" href="../public/css/styleproyetcos.css">
+  <link rel="stylesheet" href="../public/css/menu.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
@@ -34,7 +36,7 @@ if (!isset($_SESSION['correo'])) {
                     <a class="nav-link" href="home.php"><i class="bi bi-house"></i> Inicio</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link" href="perfil.php"><i class="bi bi-person-circle"></i> Perfil</a>
+                    <a class="nav-link" href="perfilUsuario.php"><i class="bi bi-person-circle"></i> Perfil</a>
                 </li>
                 <li class="nav-item mx-2">
                     <a class="nav-link" href="notificaciones.php"><i class="bi bi-bell"></i> Notificaciones</a>

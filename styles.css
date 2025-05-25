@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #ADD8E6; /* Azul claro */
   margin: 0;
   padding: 20px;
 }
@@ -16,6 +16,7 @@ body {
 
 h1 {
   text-align: center;
+  color: #333;
 }
 
 form {
@@ -27,17 +28,19 @@ form {
 input, button {
   padding: 10px;
   font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 button {
-  background-color: #28a745;
+  background-color: #4a90e2;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #218838;
+  background-color: #357ab8;
 }
 
 ul {

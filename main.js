@@ -17,17 +17,40 @@ taskForm.addEventListener("submit", (e) => {
   const title = document.getElementById("task-title").value;
   const deadline = new Date(document.getElementById("task-deadline").value);
   const email = document.getElementById("task-email").value;
+  const fileInput = document.getElementById("task-file");
+  const file = fileInput.files[0];
 
-  const task = { title, deadline, email, notified: false };
-  tasks.push(task);
-  addTaskToDOM(task);
-  scheduleNotification(task);
-  taskForm.reset();
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function () {
+      const fileData = reader.result;
+      const task = { title, deadline, email, fileData, fileName: file.name, notified: false };
+      tasks.push(task);
+      addTaskToDOM(task);
+      scheduleNotification(task);
+      taskForm.reset();
+    };
+    reader.readAsDataURL(file);
+  } else {
+    const task = { title, deadline, email, fileData: null, fileName: null, notified: false };
+    tasks.push(task);
+    addTaskToDOM(task);
+    scheduleNotification(task);
+    taskForm.reset();
+  }
 });
 
 function addTaskToDOM(task) {
   const li = document.createElement("li");
   li.textContent = `${task.title} - Vence: ${task.deadline.toLocaleString()}`;
+  if (task.fileName) {
+    const fileLink = document.createElement("a");
+    fileLink.href = task.fileData;
+    fileLink.download = task.fileName;
+    fileLink.textContent = ` Descargar ${task.fileName}`;
+    fileLink.style.marginLeft = "10px";
+    li.appendChild(fileLink);
+  }
   taskList.appendChild(li);
 }
 
@@ -62,6 +85,7 @@ function sendEmail(task) {
     to_email: task.email,
     task_title: task.title,
     task_deadline: task.deadline.toLocaleString(),
+    // No se puede enviar el archivo directamente con EmailJS sin backend
   };
 
   emailjs

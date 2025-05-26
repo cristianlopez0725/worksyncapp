@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WorkSync - Proyectos</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="styleproyectos.css" />
+</head>
+<body>
+  <!-- Pantalla de selección de proyecto -->
+  <div id="pantallaInicio" class="container py-5">
+    <div class="card p-4 shadow">
+      <h1 class="mb-4 text-center">📁 Mis proyectos</h1>
+      <ul id="listaProyectos" class="list-group mb-3"></ul>
+      <div class="input-group">
+        <input id="nuevoProyecto" type="text" class="form-control" placeholder="Nombre del nuevo proyecto" />
+        <button id="crearProyecto" class="btn btn-primary">Crear proyecto</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Vista del tablero -->
+  <div id="tablero" class="container-fluid d-none py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 id="nombreProyecto"></h2>
+      <button class="btn btn-outline-secondary" onclick="volverInicio()">← Volver</button>
+    </div>
+    <div id="listasContainer" class="d-flex flex-row flex-nowrap overflow-auto gap-3"></div>
+    <button class="btn btn-success mt-3" onclick="agregarLista()">+ Añadir otra lista</button>
+    
+  </div>
+
+  <!-- Panel lateral de tarea -->
+  <div id="panelTarea" class="d-none">
+    <button id="cerrarPanel" onclick="cerrarPanelTarea()">&times;</button>
+    <h4>📝 Detalles de la tarea</h4>
+    
+    <label for="tituloTarea" class="form-label">Título</label>
+    <input id="tituloTarea" class="form-control" type="text" />
+
+    <label for="descripcionTarea" class="form-label">Descripción</label>
+    <textarea id="descripcionTarea" class="form-control" rows="5" placeholder="Agrega una descripción..."></textarea>
+
+    <div id="nombreLista" class="text-muted mb-3"></div>
+
+    <!-- Etiquetas -->
+    <label class="form-label">Etiquetas</label>
+    <div id="etiquetasContainer"></div>
+    <button id="btnAgregarEtiqueta" class="btn btn-sm btn-outline-primary mb-3">+ Añadir etiqueta</button>
+
+    <!-- Selector de colores para etiquetas -->
+    <div id="selectorColores" class="selector-colores d-none">
+      <div class="color-option color-rojo" data-color="color-rojo" title="Rojo"></div>
+      <div class="color-option color-verde" data-color="color-verde" title="Verde"></div>
+      <div class="color-option color-azul" data-color="color-azul" title="Azul"></div>
+      <div class="color-option color-naranja" data-color="color-naranja" title="Naranja"></div>
+      <div class="color-option color-morado" data-color="color-morado" title="Morado"></div>
+      <div class="color-option color-celeste" data-color="color-celeste" title="Celeste"></div>
+      <div class="color-option color-gris" data-color="color-gris" title="Gris"></div>
+      <button id="btnCerrarSelector" class="btn btn-sm btn-outline-danger ms-2">✕</button>
+    </div>
+
+    <!-- Barra lateral botones funcionales -->
+    <hr />
+    <div class="d-flex flex-column gap-2">
+      <button id="btnEditarEtiquetas" class="btn btn-outline-secondary">Editar etiquetas</button>
+      <button id="btnCambiarMiembros" class="btn btn-outline-secondary">Cambiar miembros</button>
+      <button id="btnCambiarPortada" class="btn btn-outline-secondary">Cambiar portada</button>
+      <button id="btnEditarFechas" class="btn btn-outline-secondary">Editar las fechas</button>
+      <button id="btnMoverTarjeta" class="btn btn-outline-secondary">Mover</button>
+      <button id="btnCopiarTarjeta" class="btn btn-outline-secondary">Copiar tarjeta</button>
+      <button class="btn btn-danger mt-2" onclick="eliminarTarea()">Eliminar tarea</button>
+
+    </div>
+  </div>
+  
+  <script src="proyectos.js"></script>
+</body>
+</html>

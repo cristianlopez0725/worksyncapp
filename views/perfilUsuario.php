@@ -1,11 +1,27 @@
-
 <?php
 session_start();
 if (!isset($_SESSION['correo'])) {
     header("Location: index.php");
     exit();
 }
+
+// Conexión a la base de datos
+$conexion = new mysqli("localhost", "root", "", "worksync"); // Ajusta tu host, usuario y BD
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
+
+$correo = $_SESSION['correo'];
+$sql = "SELECT nombre, correo, telefono, descripcion, rol FROM usuarios WHERE correo = ?";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("s", $correo);
+$stmt->execute();
+$resultado = $stmt->get_result();
+$usuario = $resultado->fetch_assoc();
+
+$conexion->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -48,7 +64,7 @@ if (!isset($_SESSION['correo'])) {
                     <a class="nav-link" href="estadisticas.php"><i class="bi bi-bar-chart-line"></i> Estadísticas</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <span class="nav-link text-white"><i class="bi bi-person-check"></i> <?php echo $_SESSION['correo']; ?></span>
+                    <a class="nav-link" href="calendario.php"><i class="bi bi-calendar"></i> Calendario</a>
                 </li>
                 <li class="nav-item mx-2">
                     <a class="btn btn-outline-light btn-sm" href="index.php"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a>
@@ -61,65 +77,36 @@ if (!isset($_SESSION['correo'])) {
 
 <div class="profile-container">
   <div class="profile-header">
-     <li class="nav-item mx-2">
-        <span class="nav-link text-white"><i class="bi bi-person-check"></i> <?php echo $_SESSION['correo']; ?></span>
-                </li>
-    <p>Usuario activo en WORKSYNC</p>
+    <h1><span><i class="bx bx-user"></i>Usuario Activo </span> </h1>
   </div>
 
   <div class="cards-grid">
-    <div class="card">
-      <div class="card-title"><i class='bx bx-user'></i> Edad</div>
-      <p>...</p>
-    </div>
+  <div class="card">
+    <div class="card-title"><i class='bx bx-user'></i> Nombre</div>
+    <p><?php echo htmlspecialchars($usuario['nombre']); ?></p>
+  </div>
 
-    <div class="card">
-      <div class="card-title"><i class='bx bx-book'></i> Nivel educativo</div>
-      <p>...</p>
-    </div>
+  <div class="card">
+    <div class="card-title"><i class='bx bx-phone'></i> Teléfono</div>
+    <p><?php echo htmlspecialchars($usuario['telefono']); ?></p>
+  </div>
 
-    <div class="card">
-      <div class="card-title"><i class='bx bx-briefcase-alt'></i> Industria</div>
-      <p>...</p>
-    </div>
+  <div class="card">
+    <div class="card-title"><i class='bx bx-envelope'></i> Correo</div>
+    <p><?php echo htmlspecialchars($usuario['correo']); ?></p>
+  </div>
 
-    <div class="card">
-      <div class="card-title"><i class='bx bx-building'></i> Tamaño de la organización</div>
-      <p>...</p>
-    </div>
+  <div class="card">
+    <div class="card-title"><i class='bx bx-info-circle'></i> Descripción</div>
+    <p><?php echo htmlspecialchars($usuario['descripcion']); ?></p>
+  </div>
 
-    <div class="card">
-      <div class="card-title"><i class='bx bx-news'></i> Información</div>
-      <p>...</p>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class='bx bx-target-lock'></i> Metas</div>
-      <p>...</p>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class='bx bx-heart'></i> Motivaciones</div>
-      <p>...</p>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class='bx bx-error'></i> Dificultades</div>
-      <p>...</p>
-    </div>
-
-    <div class="card">
-      <div class="card-title"><i class='bx bx-world'></i> Redes sociales</div>
-      <div class="social-icons">
-        <i class='bx bxl-facebook-circle'></i>
-        <i class='bx bxl-instagram'></i>
-        <i class='bx bxl-twitter'></i>
-        <i class='bx bxl-linkedin-square'></i>
-        <i class='bx bxl-pinterest'></i>
-      </div>
-    </div>
+  <div class="card">
+    <div class="card-title"><i class='bx bx-user-pin'></i> Rol</div>
+    <p><?php echo htmlspecialchars($usuario['rol']); ?></p>
   </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

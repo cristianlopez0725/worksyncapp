@@ -48,6 +48,9 @@ if (!isset($_SESSION['correo'])) {
                     <a class="nav-link" href="estadisticas.php"><i class="bi bi-bar-chart-line"></i> Estadísticas</a>
                 </li>
                 <li class="nav-item mx-2">
+                    <a class="nav-link" href="calendario.php"><i class="bi bi-calendar"></i> Calendario</a>
+                </li>
+                <li class="nav-item mx-2">
                     <span class="nav-link text-white"><i class="bi bi-person-check"></i> <?php echo $_SESSION['correo']; ?></span>
                 </li>
                 <li class="nav-item mx-2">

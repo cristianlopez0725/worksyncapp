@@ -1,0 +1,105 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Tipografía y cuerpo */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4faff;
+  color: #333;
+  line-height: 1.6;
+  padding-bottom: 50px;
+}
+
+/* Contenedor principal */
+.container-principal {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Títulos principales */
+h1, h2, h3 {
+  color: #00bcd4;
+  margin-bottom: 1rem;
+}
+
+/* Botones */
+.btn-primary {
+  background-color: #00bcd4;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn-primary:hover {
+  background-color: #0097a7;
+}
+
+/* Tarjetas */
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* Barra de navegación */
+.navbar-dark {
+  background-color: #1c1c1c;
+}
+.navbar-brand img {
+  height: 60px;
+  width: auto;
+}
+
+/* Enlaces de navegación */
+.nav-link {
+  color: #fff !important;
+  font-weight: 500;
+}
+.nav-link:hover {
+  color: #00e0d9 !important;
+}
+
+/* Perfil destacado */
+.perfil-destacado {
+  background: #e0f7fa;
+  padding: 1.5rem;
+  border-left: 6px solid #00bcd4;
+  border-radius: 8px;
+  margin: 2rem 0;
+}
+
+/* Pie de página */
+footer {
+  background-color: #222;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .navbar-collapse {
+    text-align: center;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .perfil-destacado {
+    padding: 1rem;
+  }
+}

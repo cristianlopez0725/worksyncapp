@@ -34,38 +34,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-document.getElementById('save-project-btn').addEventListener('click', () => {
-  const nombre = document.getElementById('project-name').value;
-  const descripcion = document.getElementById('project-description').value;
+document.getElementById("load-project-btn").addEventListener("click", function () {
+  fetch("../backend/listar_proyectos.php")
+    .then(response => response.json())
+    .then(data => {
+      const lista = document.getElementById("lista-proyectos");
+      lista.innerHTML = "";
 
-  fetch('../controller/guardar_proyecto.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `nombre=${encodeURIComponent(nombre)}&descripcion=${encodeURIComponent(descripcion)}`
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      alert('Proyecto guardado con éxito!');
-    } else {
-      alert('Error: ' + (data.error || 'No se pudo guardar'));
-    }
-  });
-});
-
-document.getElementById('load-project-btn').addEventListener('click', () => {
-  fetch('../controller/cargar_proyecto.php')
-    .then(res => res.json())
-    .then(proyectos => {
-      if (proyectos.error) {
-        alert('Error: ' + proyectos.error);
-        return;
+      if (data.length === 0) {
+        lista.innerHTML = "<p>No tienes proyectos guardados.</p>";
+      } else {
+        data.forEach(proyecto => {
+          const item = document.createElement("div");
+          item.className = "proyecto-item p-2 border rounded mb-2";
+          item.innerHTML = `
+            <strong>${proyecto.titulo}</strong>
+            <p>${proyecto.descripcion}</p>
+            <button class="btn btn-sm btn-primary" onclick="cargarProyecto(${proyecto.id})">Cargar</button>
+          `;
+          lista.appendChild(item);
+        });
       }
 
-      let lista = 'Proyectos disponibles:\n';
-      proyectos.forEach(p => {
-        lista += `• ${p.nombre} (ID: ${p.id})\n`;
-      });
-      alert(lista);
+      const modal = new bootstrap.Modal(document.getElementById('modalCargarProyectos'));
+      modal.show();
     });
 });
+
+function cargarProyecto(id) {
+  fetch(`../backend/cargar_proyecto_id.php?id=${id}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.exito) {
+        document.getElementById("project-name").value = data.titulo;
+        document.getElementById("project-description").value = data.descripcion;
+        bootstrap.Modal.getInstance(document.getElementById('modalCargarProyectos')).hide();
+      } else {
+        alert("Error al cargar el proyecto.");
+      }
+    });
+}

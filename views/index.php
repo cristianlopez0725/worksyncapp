@@ -5,8 +5,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $correo = $_POST["correo"] ?? '';
     $clave = $_POST["contrasena"] ?? '';
 
-
-
     $stmt = $conn->prepare("SELECT * FROM usuarios WHERE correo = ?");
     $stmt->bind_param("s", $correo);
     $stmt->execute();
@@ -15,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($resultado->num_rows > 0) {
         $row = $resultado->fetch_assoc();
 
-        // Aquí se compara directamente (sin hash si no lo usas)
+        // Compara la clave directamente sin hash
         if ($clave === $row["contrasena_hash"]) {
             session_start();
             $_SESSION["usu_id"] = $row["id"];
@@ -33,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $conn->close();
 }
 ?>
+
 
 
 <!DOCTYPE html>

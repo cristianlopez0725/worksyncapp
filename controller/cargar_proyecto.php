@@ -1,26 +1,40 @@
 <?php
-session_start();
 include('../config/conexion_worksync.php');
+session_start();
 
-if (!isset($_SESSION['usuario_id'])) {
-    echo json_encode(['error' => 'No autenticado']);
-    exit;
+if (!isset($_SESSION['correo']) || !isset($_GET['id'])) {
+    echo json_encode(["exito" => false]);
+    exit();
 }
 
-$creador_id = $_SESSION['usuario_id'];
-$sql = "SELECT id, nombre, descripcion, fecha_creacion FROM proyectos WHERE creador_id = ?";
+$correo = $_SESSION['correo'];
+$id = intval($_GET['id']);
+
+$sql_usuario = "SELECT id FROM usuarios WHERE correo = ?";
+$stmt_usuario = $conn->prepare($sql_usuario);
+$stmt_usuario->bind_param("s", $correo);
+$stmt_usuario->execute();
+$res_usuario = $stmt_usuario->get_result();
+$usuario = $res_usuario->fetch_assoc();
+
+if (!$usuario) {
+    echo json_encode(["exito" => false]);
+    exit();
+}
+
+$usuario_id = $usuario['id'];
+
+$sql = "SELECT titulo, descripcion FROM proyectos WHERE id = ? AND creador_id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $creador_id);
+$stmt->bind_param("ii", $id, $usuario_id);
 $stmt->execute();
-$result = $stmt->get_result();
+$res = $stmt->get_result();
 
-$proyectos = [];
-while ($row = $result->fetch_assoc()) {
-    $proyectos[] = $row;
+if ($res->num_rows > 0) {
+    $proyecto = $res->fetch_assoc();
+    echo json_encode(["exito" => true, "titulo" => $proyecto['titulo'], "descripcion" => $proyecto['descripcion']]);
+} else {
+    echo json_encode(["exito" => false]);
 }
 
-echo json_encode($proyectos);
 
-$stmt->close();
-$conn->close();
-?>
